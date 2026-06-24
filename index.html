@@ -853,9 +853,7 @@
 
 <!-- ============================================================
      S&S STUDIO — PRODUCTS GRID + DETAIL VIEW + PAYMENT MODAL
-     Append this entire block where <!-- PRODUCTS_SECTION --> sits
-     in your existing HTML, BEFORE the Modals + Footer block.
-     ============================================================ -->
+     Append this entire block where <! PRODUCTS_SECTION --> 
 
 <!-- ─────────────────────────────────────────────
      INLINE STYLES — zoom lens & animations
@@ -1309,136 +1307,15 @@
    PRODUCT DATA — add/edit products here.
    Each object = one card. Just push() more to scale up.
 ══════════════════════════════════════════════════════ */
-const SS_PRODUCTS = [
-  {
-    id: 'SS001',
-    name: 'Onyx Linen Kurta',
-    category: 'Ethnic',
-    price: 1899,
-    mrp: 2499,
-    image: 'https://images.unsplash.com/photo-1580654712603-eb43273aff33?w=800&q=80',
-    fabric: 'Pure Linen',
-    quality: 'Premium',
-    pieces: '1 Piece',
-    occasion: 'Festive / Daily',
-    sizes: ['S','M','L','XL','XXL'],
-    tag: 'Bestseller',
-    tagColor: '#c9a84c',
-    desc: 'Woven from pure linen, this kurta drapes with effortless ease. Clean vertical seaming and a refined placket define its signature silhouette.',
-  },
-  {
-    id: 'SS002',
-    name: 'Ivory Silk Sherwani',
-    category: 'Wedding',
-    price: 7499,
-    mrp: 9999,
-    image: 'https://images.unsplash.com/photo-1610189235015-14ca6e578d42?w=800&q=80',
-    fabric: 'Mulberry Silk',
-    quality: 'Luxury',
-    pieces: '2 Pieces',
-    occasion: 'Wedding / Formal',
-    sizes: ['M','L','XL'],
-    tag: 'New',
-    tagColor: '#7eb8a4',
-    desc: 'Handcrafted in mulberry silk with zari threadwork at the cuffs and collar. Paired with matching churidar.',
-  },
-  {
-    id: 'SS003',
-    name: 'Shadow Bandhgala Suit',
-    category: 'Formal',
-    price: 4999,
-    mrp: 6500,
-    image: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800&q=80',
-    fabric: 'Wool Blend',
-    quality: 'Premium',
-    pieces: '2 Pieces',
-    occasion: 'Office / Formal',
-    sizes: ['S','M','L','XL','XXL'],
-    tag: 'Sale',
-    tagColor: '#c07050',
-    desc: 'A structured bandhgala in textured wool blend. The suppressed waist and prince-collar carry authority into any room.',
-  },
-  {
-    id: 'SS004',
-    name: 'Desert Rose Nehru Jacket',
-    category: 'Casual',
-    price: 2299,
-    mrp: 2999,
-    image: 'https://images.unsplash.com/photo-1602810319250-a663f0af2f75?w=800&q=80',
-    fabric: 'Khadi Cotton',
-    quality: 'Standard',
-    pieces: '1 Piece',
-    occasion: 'Casual / Daily',
-    sizes: ['XS','S','M','L','XL'],
-    tag: '',
-    tagColor: '',
-    desc: 'Hand-spun khadi in a muted rose tone. Nehru collar, concealed buttons, and two patch pockets.',
-  },
-  {
-    id: 'SS005',
-    name: 'Obsidian Pathani Set',
-    category: 'Ethnic',
-    price: 3199,
-    mrp: 3999,
-    image: 'https://images.unsplash.com/photo-1617137968427-85924c800a22?w=800&q=80',
-    fabric: 'Cotton-Silk Mix',
-    quality: 'Premium',
-    pieces: '2 Pieces',
-    occasion: 'Eid / Casual',
-    sizes: ['M','L','XL','XXL'],
-    tag: 'Trending',
-    tagColor: '#8b7bca',
-    desc: 'Deep obsidian with contrast ivory piping at collar and sleeves. Comes with matching salwar.',
-  },
-  {
-    id: 'SS006',
-    name: 'Royal Jodhpuri Suit',
-    category: 'Wedding',
-    price: 8999,
-    mrp: 12000,
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80',
-    fabric: 'Italian Suiting',
-    quality: 'Luxury',
-    pieces: '3 Pieces',
-    occasion: 'Wedding / Sangeet',
-    sizes: ['S','M','L','XL'],
-    tag: 'Limited',
-    tagColor: '#c9a84c',
-    desc: 'Three-piece Jodhpuri in Italian suiting fabric. Embellished buttons, subtle brocade panels, complementary pocket square.',
-  },
-  {
-    id: 'SS007',
-    name: 'Slate Waistcoat Kurta',
-    category: 'Festive',
-    price: 2799,
-    mrp: 3499,
-    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=800&q=80',
-    fabric: 'Chanderi Silk',
-    quality: 'Premium',
-    pieces: '2 Pieces',
-    occasion: 'Festive / Puja',
-    sizes: ['M','L','XL','XXL'],
-    tag: 'New',
-    tagColor: '#7eb8a4',
-    desc: 'Chanderi silk kurta with a jacquard waistcoat. The tonal slate palette works across all festive occasions.',
-  },
-  {
-    id: 'SS008',
-    name: 'Cream Classic Kurta Pyjama',
-    category: 'Casual',
-    price: 1499,
-    mrp: 1999,
-    image: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=800&q=80',
-    fabric: 'Pure Cotton',
-    quality: 'Standard',
-    pieces: '2 Pieces',
-    occasion: 'Daily / Travel',
-    sizes: ['XS','S','M','L','XL','XXL'],
-    tag: '',
-    tagColor: '',
-    desc: 'The everyday essential. Breathable pure cotton in natural cream, with simple top-stitching and a relaxed pyjama.',
-  },
-];
+let SS_PRODUCTS = (JSON.parse(localStorage.getItem('SS_PRODUCTS')) || []).map(p => ({
+  ...p,
+  mrp: p.mrp || Math.round(p.price * 1.5), 
+  sizes: p.sizes || ['S', 'M', 'L', 'XL'],
+  fabric: p.fabric || 'Premium Blend',
+  quality: p.quality || 'Standard',
+  pieces: p.pieces || '1 Piece',
+  occasion: p.occasion || 'Casual'
+}));
 
 /* ── State ─────────────────────────────────── */
 let activeFilter   = 'All';
@@ -1815,9 +1692,7 @@ if (document.readyState !== 'loading') {
   renderGrid();
 }
 </script>
-<!-- ============================================================
-     END OF S&S STUDIO PRODUCTS SECTION
-     ============================================================ -->
+
 <script>
   /* ── Navbar scroll shadow ── */
   const nav = document.getElementById('mainNav');
@@ -2362,5 +2237,514 @@ if (document.readyState !== 'loading') {
 <!-- ============================================================
      END OF S&S STUDIO MODALS + FOOTER
      ============================================================ -->
+     <!-- ============================================================
+     S&S STUDIO — HIDDEN ADMIN DASHBOARD
+     Trigger: Triple-click the footer copyright text
+     ============================================================ -->
+
+<!-- Admin Modal Overlay -->
+<div id="ss-admin-modal"
+     class="fixed inset-0 z-[9999] hidden flex-col bg-black/95 backdrop-blur-sm overflow-y-auto">
+
+  <!-- Modal Container -->
+  <div class="min-h-screen w-full max-w-6xl mx-auto px-4 py-10">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-8 border-b border-yellow-600/40 pb-4">
+      <div>
+        <p class="text-yellow-500 text-xs tracking-[0.3em] uppercase font-semibold mb-1">S&amp;S Studio</p>
+        <h2 class="text-white text-2xl font-bold tracking-wide">Admin Dashboard</h2>
+      </div>
+      <button id="ss-admin-close"
+              class="text-gray-500 hover:text-white transition-colors text-sm tracking-widest uppercase border border-gray-700 hover:border-yellow-600 px-4 py-2 rounded">
+        ✕ Close
+      </button>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="ss-toast"
+         class="hidden fixed top-6 right-6 z-[10000] bg-yellow-500 text-black text-sm font-semibold px-5 py-3 rounded shadow-lg transition-all">
+    </div>
+
+    <!-- Two-column layout: Form | Table -->
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+
+      <!-- ── LEFT: Add / Edit Product Form ── -->
+      <div class="lg:col-span-2">
+        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
+          <h3 id="ss-form-title" class="text-yellow-400 text-sm tracking-widest uppercase font-semibold mb-6">
+            Add New Product
+          </h3>
+
+          <!-- Hidden edit ID -->
+          <input type="hidden" id="ss-edit-id" value="">
+
+          <!-- Product Name -->
+          <div class="mb-4">
+            <label class="block text-gray-400 text-xs uppercase tracking-widest mb-2">Product Name *</label>
+            <input id="ss-name" type="text" placeholder="e.g. Gold Ring"
+                   class="w-full bg-gray-800 border border-gray-700 focus:border-yellow-500 text-white text-sm rounded-lg px-4 py-3 outline-none transition-colors placeholder-gray-600">
+          </div>
+
+          <!-- Price -->
+          <div class="mb-4">
+            <label class="block text-gray-400 text-xs uppercase tracking-widest mb-2">Price (₹) *</label>
+            <input id="ss-price" type="number" placeholder="e.g. 4999" min="0"
+                   class="w-full bg-gray-800 border border-gray-700 focus:border-yellow-500 text-white text-sm rounded-lg px-4 py-3 outline-none transition-colors placeholder-gray-600">
+          </div>
+
+          <!-- Category -->
+          <div class="mb-4">
+            <label class="block text-gray-400 text-xs uppercase tracking-widest mb-2">Category *</label>
+            <select id="ss-category"
+                    class="w-full bg-gray-800 border border-gray-700 focus:border-yellow-500 text-white text-sm rounded-lg px-4 py-3 outline-none transition-colors appearance-none">
+              <option value="">— Select Category —</option>
+              <option value="Casual">Casual</option>
+              <option value="Formal">Formal</option>
+              <option value="Ethnic">Ethnic</option>
+              <option value="Wedding">Wedding</option>
+              <option value="Festive">Festive</option>
+              <option value="Combos">Combos</option>
+              <option value="Custom">Custom</option>
+            </select>
+          </div>
+
+          <!-- Image URL -->
+          <div class="mb-4">
+            <label class="block text-gray-400 text-xs uppercase tracking-widest mb-2">Image URL</label>
+            <input id="ss-image" type="url" placeholder="https://..."
+                   class="w-full bg-gray-800 border border-gray-700 focus:border-yellow-500 text-white text-sm rounded-lg px-4 py-3 outline-none transition-colors placeholder-gray-600">
+            <!-- Live preview -->
+            <div id="ss-img-preview" class="mt-2 hidden">
+              <img id="ss-img-preview-el" src="" alt="Preview"
+                   class="h-24 w-24 object-cover rounded-lg border border-gray-700 mt-1">
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="mb-6">
+            <label class="block text-gray-400 text-xs uppercase tracking-widest mb-2">Description</label>
+            <textarea id="ss-desc" rows="3" placeholder="Short product description..."
+                      class="w-full bg-gray-800 border border-gray-700 focus:border-yellow-500 text-white text-sm rounded-lg px-4 py-3 outline-none transition-colors placeholder-gray-600 resize-none"></textarea>
+          </div>
+
+          <!-- Buttons -->
+          <div class="flex gap-3">
+            <button id="ss-save-btn"
+                    class="flex-1 bg-yellow-500 hover:bg-yellow-400 text-black text-sm font-bold tracking-widest uppercase py-3 rounded-lg transition-colors">
+              Save Product
+            </button>
+            <button id="ss-cancel-edit"
+                    class="hidden px-4 bg-gray-700 hover:bg-gray-600 text-white text-sm rounded-lg transition-colors">
+              Cancel
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="mt-4 grid grid-cols-2 gap-3">
+          <div class="bg-gray-900 border border-gray-800 rounded-xl p-4 text-center">
+            <p id="ss-stat-count" class="text-yellow-400 text-2xl font-bold">0</p>
+            <p class="text-gray-500 text-xs uppercase tracking-widest mt-1">Products</p>
+          </div>
+          <div class="bg-gray-900 border border-gray-800 rounded-xl p-4 text-center">
+            <p id="ss-stat-cats" class="text-yellow-400 text-2xl font-bold">0</p>
+            <p class="text-gray-500 text-xs uppercase tracking-widest mt-1">Categories</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── RIGHT: Products Table ── -->
+      <div class="lg:col-span-3">
+        <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+
+          <!-- Table toolbar -->
+          <div class="flex items-center justify-between px-5 py-4 border-b border-gray-800">
+            <h3 class="text-yellow-400 text-sm tracking-widest uppercase font-semibold">Inventory</h3>
+            <div class="flex items-center gap-3">
+              <input id="ss-search" type="text" placeholder="Search products..."
+                     class="bg-gray-800 border border-gray-700 text-white text-xs rounded px-3 py-2 outline-none focus:border-yellow-500 w-40 placeholder-gray-600">
+              <button id="ss-export-btn"
+                      class="text-gray-400 hover:text-yellow-400 text-xs uppercase tracking-widest border border-gray-700 hover:border-yellow-600 px-3 py-2 rounded transition-colors">
+                Export JSON
+              </button>
+            </div>
+          </div>
+
+          <!-- Scrollable table -->
+          <div class="overflow-x-auto max-h-[60vh] overflow-y-auto">
+            <table class="w-full text-sm">
+              <thead class="sticky top-0 bg-gray-950 text-gray-500 text-xs uppercase tracking-widest">
+                <tr>
+                  <th class="text-left px-5 py-3">Product</th>
+                  <th class="text-left px-4 py-3">Category</th>
+                  <th class="text-left px-4 py-3">Price</th>
+                  <th class="text-center px-4 py-3">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="ss-table-body" class="divide-y divide-gray-800/50">
+                <!-- Rows injected by JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Empty state -->
+          <div id="ss-empty-state" class="hidden text-center py-16 px-6">
+            <p class="text-gray-600 text-4xl mb-3">📦</p>
+            <p class="text-gray-500 text-sm">No products yet. Add your first one →</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Danger Zone -->
+    <div class="mt-8 border border-red-900/40 rounded-xl p-5 flex items-center justify-between">
+      <div>
+        <p class="text-red-400 text-xs uppercase tracking-widest font-semibold mb-1">Danger Zone</p>
+        <p class="text-gray-500 text-xs">Permanently delete all products from localStorage.</p>
+      </div>
+      <button id="ss-clear-all"
+              class="text-red-500 hover:text-red-400 text-xs uppercase tracking-widest border border-red-900 hover:border-red-600 px-4 py-2 rounded transition-colors">
+        Clear All
+      </button>
+    </div>
+
+  </div>
+</div>
+<!-- END Admin Modal -->
+
+
+<!-- ============================================================
+     ADMIN JAVASCRIPT
+     ============================================================ -->
+<script>
+(function () {
+  'use strict';
+
+  /* ── 1. STORAGE HELPERS ── */
+  const STORAGE_KEY = 'SS_PRODUCTS';
+
+  function loadProducts() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    } catch {
+      return [];
+    }
+  }
+
+  function saveProducts(products) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+  }
+
+  function generateId() {
+    return 'ss_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7);
+  }
+
+  /* ── 2. STATE ── */
+  let products = loadProducts();
+  let editingId = null;
+  let searchQuery = '';
+
+  /* ── 3. DOM REFS ── */
+  const modal        = document.getElementById('ss-admin-modal');
+  const closeBtn     = document.getElementById('ss-admin-close');
+  const saveBtn      = document.getElementById('ss-save-btn');
+  const cancelBtn    = document.getElementById('ss-cancel-edit');
+  const formTitle    = document.getElementById('ss-form-title');
+  const tableBody    = document.getElementById('ss-table-body');
+  const emptyState   = document.getElementById('ss-empty-state');
+  const toast        = document.getElementById('ss-toast');
+  const searchInput  = document.getElementById('ss-search');
+  const exportBtn    = document.getElementById('ss-export-btn');
+  const clearAllBtn  = document.getElementById('ss-clear-all');
+  const imgInput     = document.getElementById('ss-image');
+  const imgPreview   = document.getElementById('ss-img-preview');
+  const imgPreviewEl = document.getElementById('ss-img-preview-el');
+  const statCount    = document.getElementById('ss-stat-count');
+  const statCats     = document.getElementById('ss-stat-cats');
+
+  /* ── 4. TOAST ── */
+  let toastTimer;
+  function showToast(msg, isError = false) {
+    toast.textContent = msg;
+    toast.className = [
+      'fixed top-6 right-6 z-[10000] text-sm font-semibold px-5 py-3 rounded shadow-lg transition-all',
+      isError ? 'bg-red-500 text-white' : 'bg-yellow-500 text-black'
+    ].join(' ');
+    toast.classList.remove('hidden');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.add('hidden'), 3000);
+  }
+
+  /* ── 5. FORM HELPERS ── */
+  function getFormValues() {
+    return {
+      name:     document.getElementById('ss-name').value.trim(),
+      price:    parseFloat(document.getElementById('ss-price').value),
+      category: document.getElementById('ss-category').value,
+      image:    document.getElementById('ss-image').value.trim(),
+      desc:     document.getElementById('ss-desc').value.trim(),
+    };
+  }
+
+  function setFormValues(p) {
+    document.getElementById('ss-name').value     = p.name     || '';
+    document.getElementById('ss-price').value    = p.price    || '';
+    document.getElementById('ss-category').value = p.category || '';
+    document.getElementById('ss-image').value    = p.image    || '';
+    document.getElementById('ss-desc').value     = p.desc     || '';
+    updateImagePreview(p.image || '');
+  }
+
+  function clearForm() {
+    document.getElementById('ss-name').value     = '';
+    document.getElementById('ss-price').value    = '';
+    document.getElementById('ss-category').value = '';
+    document.getElementById('ss-image').value    = '';
+    document.getElementById('ss-desc').value     = '';
+    imgPreview.classList.add('hidden');
+    editingId = null;
+    formTitle.textContent = 'Add New Product';
+    saveBtn.textContent   = 'Save Product';
+    cancelBtn.classList.add('hidden');
+  }
+
+  function validateForm(values) {
+    if (!values.name)            return 'Product name is required.';
+    if (isNaN(values.price) || values.price < 0) return 'Enter a valid price.';
+    if (!values.category)        return 'Please select a category.';
+    return null;
+  }
+
+  /* ── 6. IMAGE PREVIEW ── */
+  function updateImagePreview(url) {
+    if (url) {
+      imgPreviewEl.src = url;
+      imgPreview.classList.remove('hidden');
+    } else {
+      imgPreview.classList.add('hidden');
+    }
+  }
+
+  imgInput.addEventListener('input', () => updateImagePreview(imgInput.value.trim()));
+
+  /* ── 7. RENDER TABLE ── */
+  function formatPrice(p) {
+    return '₹' + Number(p).toLocaleString('en-IN');
+  }
+
+  function renderTable() {
+    const filtered = products.filter(p =>
+      p.name.toLowerCase().includes(searchQuery) ||
+      (p.category || '').toLowerCase().includes(searchQuery)
+    );
+
+    tableBody.innerHTML = '';
+
+    if (filtered.length === 0) {
+      emptyState.classList.remove('hidden');
+    } else {
+      emptyState.classList.add('hidden');
+      filtered.forEach(p => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-gray-800/40 transition-colors group';
+        tr.innerHTML = `
+          <td class="px-5 py-3">
+            <div class="flex items-center gap-3">
+              ${p.image
+                ? `<img src="${escHtml(p.image)}" alt="" class="h-9 w-9 rounded object-cover border border-gray-700 flex-shrink-0">`
+                : `<div class="h-9 w-9 rounded bg-gray-800 border border-gray-700 flex items-center justify-center text-gray-600 flex-shrink-0 text-xs">IMG</div>`
+              }
+              <div>
+                <p class="text-white font-medium leading-tight">${escHtml(p.name)}</p>
+                ${p.desc ? `<p class="text-gray-600 text-xs leading-tight mt-0.5 max-w-[160px] truncate">${escHtml(p.desc)}</p>` : ''}
+              </div>
+            </div>
+          </td>
+          <td class="px-4 py-3">
+            <span class="text-xs bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2 py-1 rounded-full">
+              ${escHtml(p.category || '—')}
+            </span>
+          </td>
+          <td class="px-4 py-3 text-white font-mono text-sm">${formatPrice(p.price)}</td>
+          <td class="px-4 py-3 text-center">
+            <div class="flex items-center justify-center gap-2">
+              <button data-action="edit" data-id="${p.id}"
+                      class="text-xs text-gray-400 hover:text-yellow-400 border border-gray-700 hover:border-yellow-600 px-3 py-1.5 rounded transition-colors">
+                Edit
+              </button>
+              <button data-action="delete" data-id="${p.id}"
+                      class="text-xs text-gray-400 hover:text-red-400 border border-gray-700 hover:border-red-700 px-3 py-1.5 rounded transition-colors">
+                Delete
+              </button>
+            </div>
+          </td>
+        `;
+        tableBody.appendChild(tr);
+      });
+    }
+
+    // Update stats
+    statCount.textContent = products.length;
+    statCats.textContent  = new Set(products.map(p => p.category).filter(Boolean)).size;
+  }
+
+  /* ── 8. XSS SAFETY ── */
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  /* ── 9. CRUD OPERATIONS ── */
+  function handleSave() {
+    const values = getFormValues();
+    const error  = validateForm(values);
+    if (error) { showToast(error, true); return; }
+
+    if (editingId) {
+      // Update existing
+      const idx = products.findIndex(p => p.id === editingId);
+      if (idx !== -1) {
+        products[idx] = { ...products[idx], ...values, updatedAt: Date.now() };
+        showToast('Product updated!');
+      }
+    } else {
+      // Add new
+      products.unshift({ id: generateId(), ...values, createdAt: Date.now() });
+      showToast('Product added!');
+    }
+
+    saveProducts(products);
+    renderTable();
+    clearForm();
+  }
+
+  function handleEdit(id) {
+    const p = products.find(p => p.id === id);
+    if (!p) return;
+    editingId = id;
+    setFormValues(p);
+    formTitle.textContent = 'Editing Product';
+    saveBtn.textContent   = 'Update Product';
+    cancelBtn.classList.remove('hidden');
+    // Scroll form into view on mobile
+    document.getElementById('ss-name').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    document.getElementById('ss-name').focus();
+  }
+
+  function handleDelete(id) {
+    const p = products.find(p => p.id === id);
+    if (!p) return;
+    if (!confirm(`Delete "${p.name}"? This cannot be undone.`)) return;
+    products = products.filter(p => p.id !== id);
+    saveProducts(products);
+    renderTable();
+    showToast('Product deleted.');
+    if (editingId === id) clearForm();
+  }
+
+  /* ── 10. TABLE EVENT DELEGATION ── */
+  tableBody.addEventListener('click', e => {
+    const btn = e.target.closest('[data-action]');
+    if (!btn) return;
+    const { action, id } = btn.dataset;
+    if (action === 'edit')   handleEdit(id);
+    if (action === 'delete') handleDelete(id);
+  });
+
+  /* ── 11. SEARCH ── */
+  searchInput.addEventListener('input', () => {
+    searchQuery = searchInput.value.toLowerCase().trim();
+    renderTable();
+  });
+
+  /* ── 12. EXPORT JSON ── */
+  exportBtn.addEventListener('click', () => {
+    if (!products.length) { showToast('No products to export.', true); return; }
+    const blob = new Blob([JSON.stringify(products, null, 2)], { type: 'application/json' });
+    const url  = URL.createObjectURL(blob);
+    const a    = Object.assign(document.createElement('a'), {
+      href: url, download: 'SS_PRODUCTS.json'
+    });
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Exported SS_PRODUCTS.json');
+  });
+
+  /* ── 13. CLEAR ALL ── */
+  clearAllBtn.addEventListener('click', () => {
+    if (!confirm('Delete ALL products? This is permanent.')) return;
+    products = [];
+    saveProducts(products);
+    renderTable();
+    clearForm();
+    showToast('All products cleared.', true);
+  });
+
+  /* ── 14. BUTTON WIRING ── */
+  saveBtn.addEventListener('click', handleSave);
+  cancelBtn.addEventListener('click', clearForm);
+
+  closeBtn.addEventListener('click', () => {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  });
+
+ /* ── 15. SECRET TRIGGER (triple-click footer copyright) ── */
+  let clickCount = 0;
+  let clickTimer;
+
+  function attachTrigger(el) {
+    if (!el) return;
+    el.addEventListener('click', () => {
+      clickCount++;
+      clearTimeout(clickTimer);
+      clickTimer = setTimeout(() => { clickCount = 0; }, 600);
+      
+      if (clickCount >= 3) {
+        clickCount = 0;
+        let pass = prompt("Restricted Access: Enter Admin Password");
+        if (pass === "ss2024") {
+            openAdmin();
+        } else if (pass !== null) {
+            alert("❌ Incorrect Password!");
+        }
+      }
+    });
+    el.title = 'S&S Admin (triple-click)';
+  }
+
+  const triggerEl = document.getElementById('ss-admin-trigger') || document.querySelector('footer');
+  attachTrigger(triggerEl);
+
+  /* ── 16. OPEN ADMIN ── */
+  function openAdmin() {
+    products = loadProducts(); // Re-sync from storage
+    renderTable();
+    clearForm();
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  /* ── 17. CLOSE ON ESC ── */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+  });
+
+  /* ── 18. EXPOSE SS_PRODUCTS GLOBALLY ── */
+  // Your main site JS can call window.getSSProducts() to read inventory
+  window.getSSProducts = () => loadProducts();
+
+  /* ── INITIAL RENDER (on load, table pre-populates) ── */
+  renderTable();
+
+})();
+</script>
 </body>
 </html>
